@@ -1,6 +1,6 @@
-
-Feature: Explore Category Validation
 @explore
+Feature: Explore Category Validation
+
   Scenario: verify restaurants category
     Given the users select restaurant category
     When the explore business page should be displayed

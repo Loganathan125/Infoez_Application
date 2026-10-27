@@ -44,6 +44,9 @@ public class ProfilePage {
 	@AndroidFindBy(uiAutomator   = "new UiSelector().text(\"Approve & verify\").instance(0)")
 	public WebElement firstApproveBtn;
 	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Reject\").instance(0)")
+	public WebElement rejectBtn;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
 	public WebElement navigateBack;
 	
@@ -77,6 +80,9 @@ public class ProfilePage {
 	@AndroidFindBy(xpath  = "//android.widget.TextView[@text='2']")
 	public WebElement claimsCount;
 		
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"No pending claims\")")
+	public WebElement noPendingclaims;
+	
 	@AndroidFindBy(xpath = "//android.widget.TextView[starts-with(@text,'Claim #')]")
 	public List<WebElement> claimsTitle;
 	
@@ -104,6 +110,17 @@ public class ProfilePage {
 	
 	@AndroidFindBy(xpath  = "//android.widget.TextView[@text='Restaurants']/following::android.widget.TextView[@text='Activate'][1]")
 	public WebElement activate;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Suspend\").instance(0)")
+	public WebElement suspend;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"SUSPENDED\")")
+	public WebElement suspended;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Restore\")")
+	public WebElement restore;
+	
+	
 	
 	
 	

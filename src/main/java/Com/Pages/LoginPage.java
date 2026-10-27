@@ -1,6 +1,7 @@
 package Com.Pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -34,13 +35,40 @@ public class LoginPage {
 	public WebElement LoginBtn;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Enter a valid email address.\")")
-	public WebElement InvalidEmail;
+	public WebElement invalidEmail;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Please fill every field.\")")
 	public WebElement emptyEmail;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Please fill every field.\")")
 	public WebElement emptyPass;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Please fill every field.\")")
+	public WebElement Invalid1;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Enter a valid email address.\")")
+	public WebElement invalid2;
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Invalid credentials\")")
+	public WebElement invalid3;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Invalid credentials\")")
+	public WebElement invalid4;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Invalid credentials\")")
+	public WebElement invalid5;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Invalid credentials\")")
+	public WebElement invalid6;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Enter a valid email address.\")")
+	public WebElement Invalid7;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Enter a valid email address.\")")
+	public WebElement Invalid8;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Invalid credentials\")")
+	public WebElement invalid9;
+	
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Infoez\")")
 	public WebElement Valid;

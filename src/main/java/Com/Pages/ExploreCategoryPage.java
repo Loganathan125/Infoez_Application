@@ -68,7 +68,7 @@ public class ExploreCategoryPage {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Any\"]")
 	public WebElement any;
 	
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Show 8 results\"]")
+	@AndroidFindBy(xpath = "//*[starts-with(@text,'Show') and contains(@text,'results')]")
 	public WebElement showResult;
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"search-input\")")

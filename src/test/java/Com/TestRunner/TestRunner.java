@@ -24,7 +24,7 @@ import org.junit.platform.suite.api.Suite;
 )
 @ConfigurationParameter(
 	    key = FILTER_TAGS_PROPERTY_NAME,
-	    value = "@login or @explore"
+	    value = "@login or @home1 or @home2 or @home3 or @home4"
 	)
 //@ConfigurationParameter(
 //	    key = "PARALLEL_EXECUTION_ENABLED",

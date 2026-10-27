@@ -95,8 +95,8 @@ public class ProfilePageStep extends BaseClass {
 
 	@Then("claims review page should be displayed but navigated to approvals page")
 	public void claims_review_page_should_be_displayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
-		Assert.assertTrue("Claims Page Is not Visible", lp.approvals.isDisplayed());
+		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
+		Assert.assertFalse("Claims Page Is not Visible", lp.claims.isDisplayed());
 		click(DeviceSessionManager.getDriver(), lp.navigateBack);
 	}
 
@@ -109,8 +109,8 @@ public class ProfilePageStep extends BaseClass {
 
 	@Then("User management page shoould be dislayed but navigated to approvals page")
 	public void user_management_page_shoould_be_dislayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
-		Assert.assertTrue("ManageUser Page Is not Visible", lp.approvals.isDisplayed());
+		visibilityWait(DeviceSessionManager.getDriver(), lp.ManageUsers);
+		Assert.assertFalse("ManageUser Page Is not Visible", lp.ManageUsers.isDisplayed());
 
 		click(DeviceSessionManager.getDriver(), lp.navigateBack);
 	}
@@ -122,10 +122,10 @@ public class ProfilePageStep extends BaseClass {
 
 	@Then("categories Management Page should be displayed but navigated to approvals page")
 	public void categories_management_page_should_be_displayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
-		Assert.assertTrue("ManageUser Categories Is not Visible", lp.approvals.isDisplayed());
+		visibilityWait(DeviceSessionManager.getDriver(), lp.ManageCategories);
+		Assert.assertFalse("ManageUser Categories Is not Visible", lp.ManageCategories.isDisplayed());
 
-		// click(DeviceSessionManager.getDriver(), lp.navigateBack);
+		click(DeviceSessionManager.getDriver(), lp.navigateBack);
 	}
 
 	int beforeCount;
@@ -139,8 +139,8 @@ public class ProfilePageStep extends BaseClass {
 	@When("the user approve the first pending business")
 	public void the_user_approve_the_first_pending_business() {
 		click(DeviceSessionManager.getDriver(), lp.firstApproveBtn);
-		click(DeviceSessionManager.getDriver(), lp.navigateBack);
-		click(DeviceSessionManager.getDriver(), lp.businessModeration);
+		// click(DeviceSessionManager.getDriver(), lp.navigateBack);
+		// click(DeviceSessionManager.getDriver(), lp.businessModeration);
 	}
 
 	@Then("the pending count should decrease by one")
@@ -154,6 +154,29 @@ public class ProfilePageStep extends BaseClass {
 		System.out.println("AfterCount: " + actualCount);
 		Assert.assertEquals(expectedCount, actualCount);
 
+	}
+
+	@When("the admin capture the current pending count")
+	public void the_admin_capture_the_current_pending_count() {
+		beforeCount = Integer.parseInt(lp.beforeCount.getText().trim());
+		System.out.println("Before Pending Count : " + beforeCount);
+	}
+
+	@When("the admin reject the first pending business")
+	public void the_admin_reject_the_first_pending_business() {
+		click(DeviceSessionManager.getDriver(), lp.rejectBtn);
+	}
+
+	@Then("the pending count should be decrease by one")
+	public void the_pending_count_should_be_decrease_by_one() {
+		ViewWait(DeviceSessionManager.getDriver(), lp.approvals);
+		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+		int expectedCount = beforeCount - 1;
+		int actualCount = Integer.parseInt(lp.beforeCount.getText().trim());
+
+		System.out.println("BeforeCount: " + beforeCount);
+		System.out.println("AfterCount: " + actualCount);
+		Assert.assertEquals(expectedCount, actualCount);
 	}
 
 	@When("the admin tap manage user")
@@ -195,6 +218,30 @@ public class ProfilePageStep extends BaseClass {
 		Assert.assertEquals("Platform Members Listed ", headerCount, emails.size());
 	}
 
+	@When("the admin tap suspend button")
+	public void the_admin_tap_suspend_button() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
+		click(DeviceSessionManager.getDriver(), lp.suspend);
+	}
+
+	@When("the suspended button should be displayed")
+	public void the_suspended_button_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspended);
+		Assert.assertTrue("Suspended Button not Displayed", lp.suspended.isDisplayed());
+	}
+
+	@When("the admin tap restore button")
+	public void the_admin_tap_restore_button() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.restore);
+		click(DeviceSessionManager.getDriver(), lp.restore);
+	}
+
+	@Then("the suspend button should be displayed")
+	public void the_suspend_button_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
+		Assert.assertTrue("Suspend Button not Displayed", lp.suspend.isDisplayed());
+	}
+
 	@When("admin tap on claims review")
 	public void admin_tap_on_claims_review() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
@@ -205,6 +252,14 @@ public class ProfilePageStep extends BaseClass {
 	public void the_claims_count_and_listed_claims_should_match() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.claimsCount);
 		int cardCount = Integer.parseInt(lp.claimsCount.getText().replaceAll("[^0-9]", ""));
+
+		if (cardCount == 0) {
+			visibilityWait(DeviceSessionManager.getDriver(), lp.noPendingclaims);
+			Assert.assertTrue("EMpty state not displayed", lp.noPendingclaims.isDisplayed());
+			Assert.assertTrue("Claims list should be empty", lp.claimsTitle.isEmpty());
+			System.out.println("Claims card: 0/No pending claims displayed");
+			return;
+		}
 
 		Set<String> claims = new LinkedHashSet<String>();
 		int noNewRounds = 0;
@@ -309,7 +364,7 @@ public class ProfilePageStep extends BaseClass {
 	@When("the activate button should be displayed")
 	public void the_activate_button_should_be_displayed() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.activate);
-		Assert.assertTrue("Activate Button not Displayed",lp.activate.isDisplayed());
+		Assert.assertTrue("Activate Button not Displayed", lp.activate.isDisplayed());
 	}
 
 	@When("the admin tap on activate")
@@ -321,7 +376,7 @@ public class ProfilePageStep extends BaseClass {
 	@Then("the deactivate button should be displayed")
 	public void the_deactivate_button_should_be_displayed() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.deactivate);
-		Assert.assertTrue("Activate Button not Displayed",lp.deactivate.isDisplayed());
+		Assert.assertTrue("Activate Button not Displayed", lp.deactivate.isDisplayed());
 	}
 
 }

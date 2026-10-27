@@ -53,27 +53,72 @@ public class LoginStep extends BaseClass {
 	@Then("the user redirected the home page {string}")
 	public void the_user_redirected_the_home_page(String HomePage) {
 		switch (HomePage) {
-		case "InValidEmail":
-			String actual = gettext(DeviceSessionManager.getDriver(), lp.InvalidEmail);
-			Assert.assertEquals("Enter a valid email address.".trim(), actual);
-			System.out.println(actual);
-
+		case "InValid1":
+			String actual1 = gettext(DeviceSessionManager.getDriver(), lp.Invalid1);
+			Assert.assertEquals("Please fill every field.", actual1);
+			System.out.println(actual1);
 			break;
-
-		case "emptyEmail":
-			String actual2 = gettext(DeviceSessionManager.getDriver(), lp.emptyEmail);
-			Assert.assertEquals("Please fill every field.", actual2);
+		case "InValid2":
+			String actual2 = gettext(DeviceSessionManager.getDriver(), lp.invalid2);
+			Assert.assertEquals("Enter a valid email address.", actual2);
 			System.out.println(actual2);
 			break;
-		case "EmptyPass":
-			String actual3 = gettext(DeviceSessionManager.getDriver(), lp.emptyPass);
-			Assert.assertEquals("Please fill every field.", actual3);
+
+		case "InValid3":
+			String actual3 = gettext(DeviceSessionManager.getDriver(), lp.invalid3);
+			Assert.assertEquals("Invalid credentials", actual3);
 			System.out.println(actual3);
 			break;
-		case "Valid":
-			String actual4 = gettext(DeviceSessionManager.getDriver(), lp.Valid);
-			Assert.assertEquals("Infoez", actual4);
+		case "InValid4":
+			String actual4 = gettext(DeviceSessionManager.getDriver(), lp.invalid4);
+			Assert.assertEquals("Invalid credentials", actual4);
 			System.out.println(actual4);
+			break;
+		case "InValid5":
+			String actual5 = gettext(DeviceSessionManager.getDriver(), lp.invalid5);
+			Assert.assertEquals("Invalid credentials", actual5);
+			System.out.println(actual5);
+			break;
+		case "InValid6":
+			String actual6 = gettext(DeviceSessionManager.getDriver(), lp.invalid6);
+			Assert.assertEquals("Invalid credentials", actual6);
+			System.out.println(actual6);
+			break;
+		case "InValid7":
+			String actual7 = gettext(DeviceSessionManager.getDriver(), lp.Invalid7);
+			Assert.assertEquals("Enter a valid email address.", actual7);
+			System.out.println(actual7);
+			break;
+		case "InValid8":
+			String actual8 = gettext(DeviceSessionManager.getDriver(), lp.Invalid8);
+			Assert.assertEquals("Enter a valid email address.", actual8);
+			System.out.println(actual8);
+			break;
+		case "InValid9":
+			String actual9 = gettext(DeviceSessionManager.getDriver(), lp.invalid9);
+			Assert.assertEquals("Invalid credentials", actual9);
+			System.out.println(actual9);
+			break;
+		case "InValid10":
+			String actual10 = gettext(DeviceSessionManager.getDriver(), lp.invalidEmail);
+			Assert.assertEquals("Enter a valid email address.", actual10);
+			System.out.println(actual10);
+			break;
+		case "InValid11":
+			String actual11 = gettext(DeviceSessionManager.getDriver(), lp.emptyEmail);
+			Assert.assertEquals("Please fill every field.", actual11);
+			System.out.println(actual11);
+			break;
+		case "InValid12":
+			String actual12 = gettext(DeviceSessionManager.getDriver(), lp.emptyPass);
+			Assert.assertEquals("Please fill every field.", actual12);
+			System.out.println(actual12);
+			break;
+		case "Valid":
+			String actual13 = gettext(DeviceSessionManager.getDriver(), lp.Valid);
+			Assert.assertEquals("Infoez", actual13);
+			System.out.println(actual13);
+			break;
 
 		}
 	}

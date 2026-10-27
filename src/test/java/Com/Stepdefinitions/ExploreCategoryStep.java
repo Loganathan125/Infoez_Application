@@ -59,80 +59,43 @@ public class ExploreCategoryStep extends BaseClass {
 	// String rawString;
 	@Then("place found count should be validate")
 	public void place_found_count_should_be_validate() {
-		System.out.println("Start");
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
-		System.out.println("Page Visible");
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 20; i++) {
-			int before = names.size();
-			
-
-			for (int j=0;j<lp.placeCards.size();j++ ) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-					List<WebElement> cards = lp.placeCards;
-					System.out.println("Cards Found: "+cards.size());
-					     if(j>=cards.size()) {
-					    	 break;
-					     }
-				
-					 List<WebElement> texts = cards.get(j).findElements(By.className("android.widget.TextView"));
-					 System.out.println("Text Found: "+texts.size());
-					 for(WebElement text:texts) {
-						 System.out.println("Text: "+text.getText());
-					 }
-					 if(texts.size()>=3) {
-					String name = texts.get(0).getText().trim();
-					String address = texts.get(2).getText().trim();
-					//names.add(name+"|"+address);
-				if(!names.isEmpty()) {
-					names.add(name+" "+address);
-				}
-					 }
-						
-//						
-//					}
-//					if(name!=null && !name.isEmpty()) {
-//						names.add(name.trim());
-//					}
-				
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
+					}
 				} catch (StaleElementReferenceException ignored) {
-j--;
+
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
+
 			}
-				if(names.size()==before) {
-					noNewRounds++;
-					if(noNewRounds>=3)
-						break;
-				}
-				else {
-					noNewRounds=0;
-				}
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
 
-			
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			
 		}
-		System.out.println("Loop Done");
-	      System.out.println("placeFound: "+names.size()+"/Expected: "+headerCount);
-		Assert.assertEquals("places Listed " +headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
-
 	}
 
 	@Given("the users select cafe&Backery category")
 	public void the_users_select_cafe_backery_category() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.restaurants);
-		click(DeviceSessionManager.getDriver(), lp.restaurants);
+		visibilityWait(DeviceSessionManager.getDriver(), lp.cafeBackery);
+		click(DeviceSessionManager.getDriver(), lp.cafeBackery);
 	}
 
 	@When("explore business page should be displayed")
@@ -146,38 +109,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -198,38 +156,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -250,38 +203,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
 
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -302,39 +250,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			// ScrollList((AndroidDriver)DeviceSessionManager.getDriver());
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
+
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -355,39 +297,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			// ScrollList((AndroidDriver)DeviceSessionManager.getDriver());
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
+
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -408,39 +344,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			// ScrollList((AndroidDriver)DeviceSessionManager.getDriver());
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
+
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
 
@@ -462,40 +392,33 @@ j--;
 		visibilityWait(DeviceSessionManager.getDriver(), lp.exploreBusinessPage);
 		String rawHeader = lp.placesFound.getText();
 		if (rawHeader == null || rawHeader.isEmpty()) {
-
 			rawHeader = lp.placesFound.getAttribute("content-desc");
 		}
 		int headerCount = Integer.parseInt(rawHeader.replaceAll("[^0-9]", ""));
 		System.out.println("Header Count: " + headerCount);
 
 		Set<String> names = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = names.size();
-
-			for (WebElement e : lp.placeCards) {
-
+		for (int i = 0; i < 10 && names.size() < headerCount; i++) {
+			for (WebElement card : lp.placeCards) {
 				try {
-
-					String name = e.getText().trim();
-					if (name.isEmpty()) {
-						name = e.getAttribute("content-desc");
-					}
-					if (name != null && !name.isEmpty()) {
-						names.add(name.trim());
+					@Nullable
+					String desc = card.getAttribute("content-desc");
+					if (desc != null && !desc.trim().isEmpty()) {
+						names.add(desc.trim());
 					}
 				} catch (StaleElementReferenceException ignored) {
 
 				}
+				if (names.size() < headerCount) {
+					swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+				}
 
 			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			// ScrollList((AndroidDriver)DeviceSessionManager.getDriver());
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+			System.out.println("placeFound: " + names.size() + "/Expected: " + headerCount);
+			Assert.assertEquals("places Listed " + headerCount, names.size());
+
 		}
-		System.out.println("PlaceFound: " + names.size() + "/expected: " + headerCount);
-		Assert.assertEquals("places Listed ", headerCount, names.size());
 		click(DeviceSessionManager.getDriver(), lp.NavigationBack);
 	}
-
 }
