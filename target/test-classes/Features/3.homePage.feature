@@ -57,7 +57,6 @@ Feature: verify the home page fuctionality
     When user tap on any business name
     And the admin tap enquire functions
     And the admin enter enquiry message and send
-    And the admin go to my enquires
     Then the send enquiry should be listed in my enquiries
 
   Scenario: to verify the share button

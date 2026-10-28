@@ -284,28 +284,13 @@ public class HomePageStep extends BaseClass {
 
 	@When("the admin enter enquiry message and send")
 	public void the_admin_enter_enquiry_message_and_send() {
-		// visibilityWait(DeviceSessionManager.getDriver(), lp.sendAnEnquiry);
+
 		sendKeys(DeviceSessionManager.getDriver(), lp.sendAnEnquiry, "Tell the Business");
 		((AndroidDriver) DeviceSessionManager.getDriver()).hideKeyboard();
 		click(DeviceSessionManager.getDriver(), lp.sendEnquiry);
 
 		click(DeviceSessionManager.getDriver(), lp.EnquirySend);
 		visibilityWait(DeviceSessionManager.getDriver(), lp.navigateBackk);
-		click(DeviceSessionManager.getDriver(), lp.navigateBackk);
-		click(DeviceSessionManager.getDriver(), lp.profile);
-		click(DeviceSessionManager.getDriver(), lp.adminPage);
-
-	}
-
-	@When("the admin go to my enquires")
-	public void the_admin_go_to_my_enquires() {
-		// visibilityWait(DeviceSessionManager.getDriver(), lp.loginAsRegister);
-		click(DeviceSessionManager.getDriver(), lp.loginAsRegister);
-		click(DeviceSessionManager.getDriver(), lp.adminPage);
-		click(DeviceSessionManager.getDriver(), lp.customer);
-		click(DeviceSessionManager.getDriver(), lp.login);
-		click(DeviceSessionManager.getDriver(), lp.customerProfile);
-		click(DeviceSessionManager.getDriver(), lp.myEnquirys);
 
 	}
 
