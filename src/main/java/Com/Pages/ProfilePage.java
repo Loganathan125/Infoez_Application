@@ -22,6 +22,7 @@ public class ProfilePage {
 	}
 	@AndroidFindBy(uiAutomator = "new UiSelector().description(\", Profile\")")
 	public WebElement profileBtn;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Admin control center\")")
 	public WebElement admiControlCenter;
 	

@@ -24,11 +24,11 @@ import org.junit.platform.suite.api.Suite;
 )
 @ConfigurationParameter(
 	    key = FILTER_TAGS_PROPERTY_NAME,
-	    value = "  @login"
+	    value = "  @create"
 	)
 @ConfigurationParameter(
 	    key = "ExECUTION_DRY_RUN_PROPERTY_NAME",
-	    value = "false"
+	    value = "true"
 	    )
 
 public class TestRunner {
