@@ -39,93 +39,16 @@ public class ProfilePageStep extends BaseClass {
 		System.out.println(adminControl);
 	}
 
-	@When("the user tap business moderation menu")
-	public void the_user_tap_business_moderation_menu() {
+	@Given("the user tap on business moderation menu")
+	public void the_user_tap_on_business_moderation_menu() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.businessModeration);
 		click(DeviceSessionManager.getDriver(), lp.businessModeration);
 	}
 
-	@Then("the approvals page is displayed")
+	@When("the approvals page is displayed")
 	public void the_approvals_page_is_displayed() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
 		Assert.assertTrue("Business Moderation Menu is not visible", lp.approvals.isDisplayed());
-		// System.out.println(lp.approvals.isDisplayed());
-
-		// Assert.assertTrue("Business Moderation Menu is not
-		// visible",visibilityWait(DeviceSessionManager.getDriver(), lp.approvals));
-	}
-
-	@Then("the user tap on Claim")
-	public void the_user_tap_on_claim() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
-		click(DeviceSessionManager.getDriver(), lp.claims);
-		Assert.assertTrue("Claims is not tap", lp.claims.isDisplayed());
-		// System.out.println(lp.claims.isEnabled());
-	}
-
-	@Then("the user tap on users")
-	public void the_user_tap_on_users() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.users);
-		click(DeviceSessionManager.getDriver(), lp.users);
-		Assert.assertTrue("users is not tap", lp.users.isDisplayed());
-		// System.out.println(lp.users.isEnabled());
-	}
-
-	@Then("the user tap on categories")
-	public void the_user_tap_on_categories() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.categories);
-		click(DeviceSessionManager.getDriver(), lp.categories);
-		Assert.assertTrue("categories is not tap", lp.categories.isDisplayed());
-		// System.out.println(lp.categories.isEnabled());
-	}
-
-	@Then("the user again tap on approvals")
-	public void the_user_again_tap_on_approvals() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
-		click(DeviceSessionManager.getDriver(), lp.approvals);
-		Assert.assertTrue("approvals is not tap", lp.approvals.isDisplayed());
-		// System.out.println(lp.approvals.isEnabled());
-		click(DeviceSessionManager.getDriver(), lp.navigateBack);
-	}
-
-	@When("admin tap claims review")
-	public void admin_tap_claims_review() {
-		click(DeviceSessionManager.getDriver(), lp.claimsReviews);
-	}
-
-	@Then("claims review page should be displayed but navigated to approvals page")
-	public void claims_review_page_should_be_displayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
-		Assert.assertFalse("Claims Page Is not Visible", lp.claims.isDisplayed());
-		click(DeviceSessionManager.getDriver(), lp.navigateBack);
-	}
-
-	@When("admin tap Manage User")
-	public void admin_tap_manage_user() {
-
-		click(DeviceSessionManager.getDriver(), lp.ManageUsers);
-
-	}
-
-	@Then("User management page shoould be dislayed but navigated to approvals page")
-	public void user_management_page_shoould_be_dislayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.ManageUsers);
-		Assert.assertFalse("ManageUser Page Is not Visible", lp.ManageUsers.isDisplayed());
-
-		click(DeviceSessionManager.getDriver(), lp.navigateBack);
-	}
-
-	@When("admin tap Manager categories")
-	public void admin_tap_manager_categories() {
-		click(DeviceSessionManager.getDriver(), lp.ManageUsers);
-	}
-
-	@Then("categories Management Page should be displayed but navigated to approvals page")
-	public void categories_management_page_should_be_displayed_but_navigated_to_approvals_page() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.ManageCategories);
-		Assert.assertFalse("ManageUser Categories Is not Visible", lp.ManageCategories.isDisplayed());
-
-		click(DeviceSessionManager.getDriver(), lp.navigateBack);
 	}
 
 	int beforeCount;
@@ -136,11 +59,9 @@ public class ProfilePageStep extends BaseClass {
 		System.out.println("Before Pending Count : " + beforeCount);
 	}
 
-	@When("the user approve the first pending business")
-	public void the_user_approve_the_first_pending_business() {
+	@When("the user approve the tap pending business")
+	public void the_user_approve_the_tap_pending_business() {
 		click(DeviceSessionManager.getDriver(), lp.firstApproveBtn);
-		// click(DeviceSessionManager.getDriver(), lp.navigateBack);
-		// click(DeviceSessionManager.getDriver(), lp.businessModeration);
 	}
 
 	@Then("the pending count should decrease by one")
@@ -153,7 +74,6 @@ public class ProfilePageStep extends BaseClass {
 		System.out.println("BeforeCount: " + beforeCount);
 		System.out.println("AfterCount: " + actualCount);
 		Assert.assertEquals(expectedCount, actualCount);
-
 	}
 
 	@When("the admin capture the current pending count")
@@ -177,74 +97,11 @@ public class ProfilePageStep extends BaseClass {
 		System.out.println("BeforeCount: " + beforeCount);
 		System.out.println("AfterCount: " + actualCount);
 		Assert.assertEquals(expectedCount, actualCount);
+
 	}
 
-	@When("the admin tap manage user")
-	public void the_admin_tap_manage_user() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.users);
-		click(DeviceSessionManager.getDriver(), lp.users);
-	}
-	// int headerCount;
-
-	@Then("the users count,platform members count nd listed members should match")
-	public void the_users_count_platform_members_count_nd_listed_members_should_match() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.platformMember);
-		int userCount = Integer.parseInt(lp.usersCount.getText().replaceAll("[^0-9]", ""));
-		int headerCount = Integer.parseInt(lp.platformMember.getText().replaceAll("[^0-9]", ""));
-		System.out.println("Users: " + userCount + " |Header: " + headerCount);
-		Assert.assertEquals("Users vs Platform Member Header", userCount, headerCount);
-		Set<String> emails = new LinkedHashSet<String>();
-		int noNewRounds = 0;
-		for (int i = 0; i < 100; i++) {
-			int before = emails.size();
-			for (WebElement e : lp.memberEmails) {
-				try {
-					emails.add(e.getText().trim());
-				} catch (StaleElementReferenceException ignored) {
-
-				}
-			}
-			noNewRounds = (emails.size() == before) ? noNewRounds + 1 : 0;
-			if (emails.size() >= headerCount || noNewRounds >= 3) {
-
-				break;
-
-			}
-			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
-		}
-		System.out.println("Members Found: " + emails.size() + "/expected: " + headerCount);
-		Assert.assertEquals("Platform Members Listed ", headerCount, emails.size());
-	}
-
-	@When("the admin tap suspend button")
-	public void the_admin_tap_suspend_button() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
-		click(DeviceSessionManager.getDriver(), lp.suspend);
-	}
-
-	@When("the suspended button should be displayed")
-	public void the_suspended_button_should_be_displayed() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.suspended);
-		Assert.assertTrue("Suspended Button not Displayed", lp.suspended.isDisplayed());
-	}
-
-	@When("the admin tap restore button")
-	public void the_admin_tap_restore_button() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.restore);
-		click(DeviceSessionManager.getDriver(), lp.restore);
-	}
-
-	@Then("the suspend button should be displayed")
-	public void the_suspend_button_should_be_displayed() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
-		Assert.assertTrue("Suspend Button not Displayed", lp.suspend.isDisplayed());
-	}
-
-	@When("admin tap on claims review")
+	@Then("admin tap on claims review")
 	public void admin_tap_on_claims_review() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
 		click(DeviceSessionManager.getDriver(), lp.claims);
 	}
 
@@ -287,17 +144,77 @@ public class ProfilePageStep extends BaseClass {
 
 	}
 
-	@When("the admin tap on categories")
+	@Then("the admin tap manage user")
+	public void the_admin_tap_manage_user() {
+		click(DeviceSessionManager.getDriver(), lp.users);
+	}
+
+	@Then("the users count,platform members count nd listed members should match")
+	public void the_users_count_platform_members_count_nd_listed_members_should_match() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.platformMember);
+		int userCount = Integer.parseInt(lp.usersCount.getText().replaceAll("[^0-9]", ""));
+		int headerCount = Integer.parseInt(lp.platformMember.getText().replaceAll("[^0-9]", ""));
+		System.out.println("Users: " + userCount + " |Header: " + headerCount);
+		Assert.assertEquals("Users vs Platform Member Header", userCount, headerCount);
+		Set<String> emails = new LinkedHashSet<String>();
+		int noNewRounds = 0;
+		for (int i = 0; i < 100; i++) {
+			int before = emails.size();
+			for (WebElement e : lp.memberEmails) {
+				try {
+					emails.add(e.getText().trim());
+				} catch (StaleElementReferenceException ignored) {
+
+				}
+			}
+			noNewRounds = (emails.size() == before) ? noNewRounds + 1 : 0;
+			if (emails.size() >= headerCount || noNewRounds >= 3) {
+
+				break;
+
+			}
+			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
+
+			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+		}
+		System.out.println("Members Found: " + emails.size() + "/expected: " + headerCount);
+		Assert.assertEquals("Platform Members Listed ", headerCount, emails.size());
+	}
+
+	@Then("the admin tap suspend button")
+	public void the_admin_tap_suspend_button() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
+		click(DeviceSessionManager.getDriver(), lp.suspend);
+	}
+
+	@Then("the suspended button should be displayed")
+	public void the_suspended_button_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspended);
+		Assert.assertTrue("Suspended Button not Displayed", lp.suspended.isDisplayed());
+	}
+
+	@Then("the admin tap restore button")
+	public void the_admin_tap_restore_button() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.restore);
+		click(DeviceSessionManager.getDriver(), lp.restore);
+	}
+
+	@Then("the suspend button should be displayed")
+	public void the_suspend_button_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.suspend);
+		Assert.assertTrue("Suspend Button not Displayed", lp.suspend.isDisplayed());
+	}
+
+	@Then("the admin tap on categories")
 	public void the_admin_tap_on_categories() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.categories);
 		click(DeviceSessionManager.getDriver(), lp.categories);
 	}
 
 	@Then("tap on new button")
 	public void tap_on_new_button() {
-		// swipeUp((AndroidDriver) DeviceSessionManager.getDriver());
 		visibilityWait(DeviceSessionManager.getDriver(), lp.newButton);
 		click(DeviceSessionManager.getDriver(), lp.newButton);
+
 	}
 
 	@Then("the admin enter new categories {string}")
@@ -316,7 +233,6 @@ public class ProfilePageStep extends BaseClass {
 	@Then("the admin validate the new categories")
 	public void the_admin_validate_the_new_categories() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.categories);
-
 	}
 
 	@Then("the categories header count and listed categories should match")
@@ -342,32 +258,25 @@ public class ProfilePageStep extends BaseClass {
 
 			}
 			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
-			// ScrollList((AndroidDriver)DeviceSessionManager.getDriver());
-			// scrollToElementByText(DeviceSessionManager.getDriver(), "ADMIN");
+
 		}
 		System.out.println("Categories Found: " + names.size() + "/expected: " + headerCount);
 		Assert.assertEquals("Categories Listed ", headerCount, names.size());
 	}
 
-	@When("the admin click on categories")
-	public void the_admin_click_on_categories() {
+	@Then("the admin tap on deactivates")
+	public void the_admin_tap_on_deactivates() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.categories);
 		click(DeviceSessionManager.getDriver(), lp.categories);
 	}
 
-	@When("the admin tap on deactivates")
-	public void the_admin_tap_on_deactivates() {
+	@Then("the activate button should be displayed")
+	public void the_activate_button_should_be_displayed() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.deactivate);
 		click(DeviceSessionManager.getDriver(), lp.deactivate);
 	}
 
-	@When("the activate button should be displayed")
-	public void the_activate_button_should_be_displayed() {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.activate);
-		Assert.assertTrue("Activate Button not Displayed", lp.activate.isDisplayed());
-	}
-
-	@When("the admin tap on activate")
+	@Then("the admin tap on activate")
 	public void the_admin_tap_on_activate() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.activate);
 		click(DeviceSessionManager.getDriver(), lp.activate);
@@ -377,6 +286,115 @@ public class ProfilePageStep extends BaseClass {
 	public void the_deactivate_button_should_be_displayed() {
 		visibilityWait(DeviceSessionManager.getDriver(), lp.deactivate);
 		Assert.assertTrue("Activate Button not Displayed", lp.deactivate.isDisplayed());
+	}
+
+	@Then("the user tap on Claim")
+	public void the_user_tap_on_claim() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.claims);
+		click(DeviceSessionManager.getDriver(), lp.claims);
+		Assert.assertTrue("Claims is not tap", lp.claims.isDisplayed());
+		// System.out.println(lp.claims.isEnabled());
+	}
+
+	@Then("the user tap on users")
+	public void the_user_tap_on_users() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.users);
+		click(DeviceSessionManager.getDriver(), lp.users);
+		Assert.assertTrue("users is not tap", lp.users.isDisplayed());
+		// System.out.println(lp.users.isEnabled());
+	}
+
+	@Then("the user tap on categories")
+	public void the_user_tap_on_categories() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.categories);
+		click(DeviceSessionManager.getDriver(), lp.categories);
+		Assert.assertTrue("categories is not tap", lp.categories.isDisplayed());
+		// System.out.println(lp.categories.isEnabled());
+	}
+
+	@Then("the user again tap on approvals")
+	public void the_user_again_tap_on_approvals() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
+		click(DeviceSessionManager.getDriver(), lp.approvals);
+		Assert.assertTrue("approvals is not tap", lp.approvals.isDisplayed());
+		// System.out.println(lp.approvals.isEnabled());
+		click(DeviceSessionManager.getDriver(), lp.navigateBack);
+	}
+
+	@When("admin tap claims review")
+	public void admin_tap_claims_review() {
+		click(DeviceSessionManager.getDriver(), lp.claimsReviews);
+	}
+
+	@Then("claims review page should be displayed but navigated to approvals page")
+	public void claims_review_page_should_be_displayed_but_navigated_to_approvals_page() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
+		Assert.assertTrue("Claims Page Is not Visible", lp.approvals.isDisplayed());
+		click(DeviceSessionManager.getDriver(), lp.navigateBack);
+	}
+
+	@When("admin tap Manage User")
+	public void admin_tap_manage_user() {
+
+		click(DeviceSessionManager.getDriver(), lp.ManageUsers);
+
+	}
+
+	@Then("User management page shoould be dislayed but navigated to approvals page")
+	public void user_management_page_shoould_be_dislayed_but_navigated_to_approvals_page() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
+		Assert.assertTrue("ManageUser Page Is not Visible", lp.approvals.isDisplayed());
+
+		click(DeviceSessionManager.getDriver(), lp.navigateBack);
+	}
+
+	@When("admin tap Manager categories")
+	public void admin_tap_manager_categories() {
+		click(DeviceSessionManager.getDriver(), lp.ManageUsers);
+	}
+
+	@Then("categories Management Page should be displayed but navigated to approvals page")
+	public void categories_management_page_should_be_displayed_but_navigated_to_approvals_page() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.approvals);
+		Assert.assertTrue("ManageUser Categories Is not Visible", lp.approvals.isDisplayed());
+
+		click(DeviceSessionManager.getDriver(), lp.navigateBack);
+	}
+	int beforeNotifications;
+
+	@Given("the admin tap on notification")
+	public void the_admin_tap_on_notification() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.notifySymbol);
+		click(DeviceSessionManager.getDriver(), lp.notifySymbol);
+	}
+
+	@When("the user capture the current notification count")
+	public void the_user_capture_the_current_notification_count() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+		String rawBefore = lp.beforeCount.getText();
+		if (rawBefore == null || rawBefore.isEmpty()) {
+			rawBefore = lp.beforeCount.getAttribute("content-desc");
+		}
+		beforeNotifications = Integer.parseInt(lp.beforeCount.getText().replaceAll("[^0-9]", ""));
+		System.out.println("BeforeNotification Count: " + beforeNotifications);
+	}
+
+	@When("the user open the first notification")
+	public void the_user_open_the_first_notification() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.firstNotification);
+		click(DeviceSessionManager.getDriver(), lp.firstNotification);
+	}
+
+	@Then("the notification count should decrease by one")
+	public void the_notification_count_should_decrease_by_one() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+		String rawAfter = lp.beforeCount.getText();
+		if (rawAfter == null || rawAfter.isEmpty()) {
+			rawAfter = lp.beforeCount.getAttribute("content-desc");
+		}
+		int afterNotification = Integer.parseInt(lp.beforeCount.getText().replaceAll("[^0-9]", ""));
+		System.out.println("AfterNotification Count: " + afterNotification);
+		Assert.assertEquals("Notification count did not decreased by one", beforeNotifications - 1, afterNotification);
 	}
 
 }

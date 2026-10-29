@@ -69,8 +69,12 @@ public class HomePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
 	public WebElement searchBar;
 	
-	@AndroidFindBy(xpath  = "//android.view.ViewGroup[starts-with(@resource-id,'save-business-')]")
+//	@AndroidFindBy(xpath  = "//android.view.ViewGroup[starts-with(@resource-id,'save-business-')]")
+//	public WebElement favouriteIcon;
+	
+	@AndroidFindBy(uiAutomator    = "new UiSelector().text(\"\")")
 	public WebElement favouriteIcon;
+	
 	
 	@AndroidFindBy(xpath   = "//android.widget.TextView[@text='Saved']")
 	public WebElement savedButton;
@@ -141,6 +145,9 @@ public class HomePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"What are you looking for?\")")
 	public WebElement findLocal;
 	
+	@AndroidFindBy(xpath = "//android.widget.EditText[@text=\"12345678\"]")
+	public WebElement invalid;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
 	public WebElement findBar;
 	
@@ -158,6 +165,24 @@ public class HomePage {
 	
 	@AndroidFindBy(xpath = "//*[contains(@text,'Open today')]")
 	public List<WebElement> openToday;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Filters & sort\")")
+	public WebElement filterSort;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Top rated\")")
+	public WebElement topRated;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"4+\")")
+	public WebElement rating4;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Newest\")")
+	public WebElement newest;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"4.5+\")")
+	public WebElement rating5;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Most reviewed\")")
+	public WebElement mostReviewed;
 	
 	
 	@AndroidFindBy(xpath = "//*[contains(@text,'places found')]/following::*[@text='Verified']")
@@ -229,6 +254,9 @@ public class HomePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Reset\")")
 	public WebElement reset;
 	
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"No matches. Try a different name.\")")
+	public WebElement invalid1;
 	
 	
 	

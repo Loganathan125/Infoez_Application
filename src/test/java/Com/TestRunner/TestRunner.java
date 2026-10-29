@@ -24,12 +24,12 @@ import org.junit.platform.suite.api.Suite;
 )
 @ConfigurationParameter(
 	    key = FILTER_TAGS_PROPERTY_NAME,
-	    value = "@login or @home1 or @home2 or @home3 or @home4"
+	    value = "  @login"
 	)
-//@ConfigurationParameter(
-//	    key = "PARALLEL_EXECUTION_ENABLED",
-//	    value = "true"
-//	    )
+@ConfigurationParameter(
+	    key = "ExECUTION_DRY_RUN_PROPERTY_NAME",
+	    value = "false"
+	    )
 
 public class TestRunner {
 	

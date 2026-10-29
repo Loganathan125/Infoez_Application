@@ -1,6 +1,5 @@
 package Com.BaseClass;
 
-
 import java.time.Duration;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -24,10 +23,13 @@ import io.cucumber.java.Scenario;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 public class BaseClass {
+
 	private static final Duration TIMEOUT = Duration.ofSeconds(80);
 
 	public static AndroidDriver driver;
+
 	public static void click(AndroidDriver driver, WebElement element) {
 
 		WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
@@ -43,9 +45,18 @@ public class BaseClass {
 
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
-	
-	public void ViewWait(AndroidDriver driver,WebElement firstApproveBtn) {
+
+	public void ViewWait(AndroidDriver driver, WebElement firstApproveBtn) {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+
+	}
+	public static void relaunchApp(AndroidDriver driver) {
+		driver.terminateApp("com.infoez.app");
+		driver.activateApp("com.infoez.app");
+		}
+
+	public void navigateBack(AndroidDriver driver) {
+		driver.navigate().back();
 
 	}
 
@@ -55,18 +66,20 @@ public class BaseClass {
 
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
+
 	public static void sendKeys(AndroidDriver driver, WebElement element, String text) {
 
 		WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
 
 		wait.until(ExpectedConditions.visibilityOf(element));
 
-		element.click();
+		//element.click();
 		element.clear();
 		element.sendKeys(text);
 		driver.hideKeyboard();
 	}
-	public void clear(AndroidDriver driver,WebElement element) {
+
+	public void clear(AndroidDriver driver, WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
 
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -116,9 +129,6 @@ public class BaseClass {
 			System.out.println("Screenshot failed: " + e.getMessage());
 		}
 	}
-	
-
-	
 
 	public static void swipeUp(AndroidDriver driver) {
 
@@ -131,89 +141,86 @@ public class BaseClass {
 		driver.executeScript("mobile: scrollGesture",
 				Map.of("left", 100, "top", 800, "width", 800, "height", 900, "direction", "down", "percent", 0.5));
 	}
+
 	public static void ScrollList(AndroidDriver driver) {
 		try {
-			WebElement list=driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().scrollable(true)"));
-		
-  
-		driver.executeScript("mobile: scrollGesture",
-				Map.of("elementId",((RemoteWebElement) list).getId(),"direction", "down", "percent", 0.5));
-		}
-		 catch (Exception e) {
-			 driver.executeScript("mobile: scrollGesture",
-						Map.of("left", 100, "top", 800, "width", 800, "height", 900, "direction", "down", "percent", 0.5));
+			WebElement list = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().scrollable(true)"));
+
+			driver.executeScript("mobile: scrollGesture",
+					Map.of("elementId", ((RemoteWebElement) list).getId(), "direction", "down", "percent", 0.5));
+		} catch (Exception e) {
+			driver.executeScript("mobile: scrollGesture",
+					Map.of("left", 100, "top", 800, "width", 800, "height", 900, "direction", "down", "percent", 0.5));
 		}
 		try {
 			Thread.sleep(800);
 		} catch (InterruptedException ignored) {
-			
+
 		}
 	}
-	
-	public String gettext(AndroidDriver driver,WebElement element) {
-		
+
+	public String gettext(AndroidDriver driver, WebElement element) {
+
 		WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
-		
+
 		wait.until(ExpectedConditions.visibilityOf(element));
-		
+
 		return element.getText();
 
 	}
+
 	public void scrollToElementByText(AndroidDriver driver, String text) {
-		 
+
 		driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))"
-		 
-		+ ".scrollIntoView(new UiSelector().text(\"" + text + "\"))"));
-		}
+
+				+ ".scrollIntoView(new UiSelector().text(\"" + text + "\"))"));
+	}
+
 	public void ScrollLeft(AndroidDriver driver) {
-		
-		 org.openqa.selenium.Dimension size = driver.manage().window().getSize();
-		 int y = (int) (size.getHeight()*0.42);
-		  int startX = (int) (size.getWidth()*0.85);
-		 int endX=(int) (size.getWidth()*0.15);
-		 PointerInput finger=new PointerInput(PointerInput.Kind.TOUCH, "finger");
-		 Sequence swipe=new Sequence(finger, 1);
-		 swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX,y));
-		 swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-		 swipe.addAction(finger.createPointerMove(Duration.ofMillis(700), PointerInput.Origin.viewport(), endX, y));
-		 swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-		java.util.List<Sequence> actions=new ArrayList<>();
+
+		org.openqa.selenium.Dimension size = driver.manage().window().getSize();
+		int y = (int) (size.getHeight() * 0.42);
+		int startX = (int) (size.getWidth() * 0.85);
+		int endX = (int) (size.getWidth() * 0.15);
+		PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+		Sequence swipe = new Sequence(finger, 1);
+		swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, y));
+		swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+		swipe.addAction(finger.createPointerMove(Duration.ofMillis(700), PointerInput.Origin.viewport(), endX, y));
+		swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+		java.util.List<Sequence> actions = new ArrayList<>();
 		actions.add(swipe);
 		driver.perform(actions);
 //		int yPos=800;
 //		 driver.executeScript("mobile: swipeGesture",
 //					Map.of("left", 50, "top", yPos, "width", screenWidth-100, "height", 100, "direction", "left", "percent", 0.75));
 	}
-	
-	public void scrollCategoriesUntilvisible(AndroidDriver driver,WebElement scrollEducation) {
+
+	public void scrollCategoriesUntilvisible(AndroidDriver driver, WebElement scrollEducation) {
 		int screenWWidth = driver.manage().window().getSize().getWidth();
-		System.out.println("Screen Width: "+ screenWWidth);
-		for(int i=0;i<10;i++) {
-			
-			
+		System.out.println("Screen Width: " + screenWWidth);
+		for (int i = 0; i < 10; i++) {
+
 			try {
 				Rectangle rect = scrollEducation.getRect();
-				System.out.println("Try "+i+"-> X="+rect.getX()+"width="+rect.getWidth());
-				int centerX = rect.getX()+rect.getWidth()/2;
-				if(centerX >0 && centerX < screenWWidth){
+				System.out.println("Try " + i + "-> X=" + rect.getX() + "width=" + rect.getWidth());
+				int centerX = rect.getX() + rect.getWidth() / 2;
+				if (centerX > 0 && centerX < screenWWidth) {
 					return;
-					
+
 				}
 			} catch (Exception e) {
-				System.out.println("Try"+i+"->Education not found: "+e.getClass().getSimpleName());
+				System.out.println("Try" + i + "->Education not found: " + e.getClass().getSimpleName());
 			}
 
-			}
-			ScrollLeft(driver);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException ignored) {
-				
-			}
-			throw new NoSuchElementException("Category not visible after swiping");
 		}
+		ScrollLeft(driver);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException ignored) {
 
+		}
+		throw new NoSuchElementException("Category not visible after swiping");
 	}
 
-	
-
+}

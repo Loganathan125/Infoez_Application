@@ -120,6 +120,11 @@ public class ProfilePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Restore\")")
 	public WebElement restore;
 	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\")")
+	public WebElement notifySymbol;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"\").instance(1)")
+	public WebElement firstNotification;
 	
 	
 	

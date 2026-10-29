@@ -76,4 +76,13 @@ public class ExploreCategoryPage {
 	
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text=\"3+\"]")
 	public WebElement Rating3;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"home-location\")")
+	public WebElement locationField;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Chennai\")")
+	public WebElement city;
+	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Featured in Chennai\")")
+	public WebElement featured;
 }
