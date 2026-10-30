@@ -73,7 +73,13 @@ public class ProfilePageStep extends BaseClass {
 
 		System.out.println("BeforeCount: " + beforeCount);
 		System.out.println("AfterCount: " + actualCount);
+		try {
 		Assert.assertEquals(expectedCount, actualCount);
+		}finally {
+		navigateBack(DeviceSessionManager.getDriver());
+		click(DeviceSessionManager.getDriver(), lp.businessModeration);
+		
+		}
 	}
 
 	@When("the admin capture the current pending count")

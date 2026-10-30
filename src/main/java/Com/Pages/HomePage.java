@@ -36,11 +36,15 @@ public class HomePage {
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Chennai, India\")")
 	public WebElement locationField;
 	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Choose your city\")")
+	public WebElement chooseYourCity;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"city-search-input\")")
 	public WebElement searchCities;
 	
 	@AndroidFindBy(xpath = "//*[contains(translate(@text,'CHENNAI','chennai'),'chennai') or contains(translate(@content-desc,'CHENNAI','chennai'),'chennai')]")
 	public WebElement cityoption;
+	
 	
 //	@AndroidFindBy(xpath = "//*[contains(@text,'Chennai') or contains(@content-desc,'Chennai')]")
 //	public WebElement selectedLocation;
@@ -251,12 +255,20 @@ public class HomePage {
 	@AndroidFindBy(xpath = "//*[starts-with(@text,'Show') and contains(@text,'results')]")
 	public WebElement showResult;
 	
+	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Featured in Chennai\")")
+	public WebElement selectedLocation1;
+	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Reset\")")
 	public WebElement reset;
 	
 	
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"No matches. Try a different name.\")")
 	public WebElement invalid1;
+
+	public void cityoption(String city) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

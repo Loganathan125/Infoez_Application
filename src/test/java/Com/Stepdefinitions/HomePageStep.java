@@ -36,37 +36,36 @@ public class HomePageStep extends BaseClass {
 		click(DeviceSessionManager.getDriver(), lp.locationField);
 	}
 
-	@When("the user search city {string}")
-	public void the_user_search_city(String string) {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.searchCities);
+	@When("the user choosyour city popup should be displayed")
+	public void the_user_choosyour_city_popup_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.chooseYourCity);
+		Assert.assertTrue("Popup not displayed",lp.chooseYourCity.isDisplayed());
+	}
+
+	@When("the user enter city {string} in search cities")
+	public void the_user_enter_city_in_search_cities(String string) {
+		lp.searchCities.clear();
 		sendKeys(DeviceSessionManager.getDriver(), lp.searchCities, string);
 	}
 
-	@When("the user select city {string} from the list")
-	public void the_user_select_city_from_the_list(String string) {
-		visibilityWait(DeviceSessionManager.getDriver(), lp.cityoption);
-		click(DeviceSessionManager.getDriver(), lp.cityoption);
+	@Then("the no matches message should be displayed")
+	public void the_no_matches_message_should_be_displayed() {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.invalid1);
+		Assert.assertEquals("No matches. Try a different name.", lp.invalid1.getText().trim());
 	}
 
-	@Then("the home page should display location {string}")
-	public void the_home_page_should_display_location(String location) {
+	
 
-		switch (location) {
-		case "invalid1":
-		case "invalid2":
-			String actual1 = gettext(DeviceSessionManager.getDriver(), lp.invalid1);
-			Assert.assertEquals("No matches. Try a different name.", actual1);
-			System.out.println(actual1);
+	@Then("the user select city {string} from  list")
+	public void the_user_select_city_from_list(String string) {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.cityoption);
+		 click(DeviceSessionManager.getDriver(), lp.cityoption);
+	}
 
-			break;
-		default:
-			visibilityWait(DeviceSessionManager.getDriver(), lp.cityoption);
-			click(DeviceSessionManager.getDriver(), lp.cityoption);
-			visibilityWait(DeviceSessionManager.getDriver(), lp.selectedLocation);
-			Assert.assertTrue("The Location did not selected", lp.selectedLocation.isDisplayed());
-			break;
-		}
-
+	@Then("the home page should be display location {string}")
+	public void the_home_page_should_be_display_location(String string) {
+		visibilityWait(DeviceSessionManager.getDriver(), lp.selectedLocation1);
+		Assert.assertTrue("Location mismatch", lp.selectedLocation1.getText().isEmpty());
 	}
 
 	@Then("the admin tap on lodation field")

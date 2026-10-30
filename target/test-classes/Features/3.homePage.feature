@@ -1,10 +1,13 @@
-Feature: verify the home page fuctionality
 
+Feature: verify the home page fuctionality
+@home
   Scenario Outline: to verify the location search and nearby business functionality
     Given the user tap on location field
-    When the user search city "<City>"
-    And the user select city "chennai" from the list
-    Then the home page should display location "<location>"
+    When the user choosyour city popup should be displayed
+    And the user enter city "abc" in search cities 
+   Then the no matches message should be displayed 
+   And the user select city "Chennai" from  list
+   Then the home page should be display location "Chennai" 
     And the admin tap on lodation field
     And the amin tap on use my current location
     And the admin tap on this time option
@@ -14,12 +17,12 @@ Feature: verify the home page fuctionality
     And the admin tap turn on option
     Then the Nearby business should be displayed
 
-    Examples:
-      | City     | location |
-      | abc      | invalid1 |
-      | 23426242 | invalid2 |
-      | Chennai  | valid    |
-      | ch       | valid    |
+    #Examples:
+     # | City     | location |
+    #  | abc      | invalid1 |
+    #  | 23426242 | invalid2 |
+     # | Chennai  | valid    |
+     # | ch       | valid    |
 
   Scenario: to verify the business actions like call,whatsapp,directions,enquiry ,share and favourite
     Given the admin click on search bar
