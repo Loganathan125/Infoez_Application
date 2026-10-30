@@ -26,7 +26,7 @@ import java.util.Collection;
 
 public class BaseClass {
 
-	private static final Duration TIMEOUT = Duration.ofSeconds(80);
+	private static final Duration TIMEOUT = Duration.ofSeconds(60);
 
 	public static AndroidDriver driver;
 

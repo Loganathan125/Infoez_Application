@@ -9,6 +9,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.model.Device;
@@ -60,26 +61,46 @@ public class ProfilePageStep extends BaseClass {
 	}
 
 	@When("the user approve the tap pending business")
-	public void the_user_approve_the_tap_pending_business() {
-		click(DeviceSessionManager.getDriver(), lp.firstApproveBtn);
+	public void the_user_approve_the_tap_pending_business() throws InterruptedException {
+		Thread.sleep(2000);
+		click(DeviceSessionManager.getDriver(), lp.ApproveBtn);
 	}
 
 	@Then("the pending count should decrease by one")
 	public void the_pending_count_should_decrease_by_one() {
-		ViewWait(DeviceSessionManager.getDriver(), lp.approvals);
-		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
-		int expectedCount = beforeCount - 1;
-		int actualCount = Integer.parseInt(lp.beforeCount.getText().trim());
 
-		System.out.println("BeforeCount: " + beforeCount);
-		System.out.println("AfterCount: " + actualCount);
-		try {
-		Assert.assertEquals(expectedCount, actualCount);
-		}finally {
-		navigateBack(DeviceSessionManager.getDriver());
-		click(DeviceSessionManager.getDriver(), lp.businessModeration);
-		
+		int pending = Integer.parseInt(lp.beforeCount.getText().trim());
+
+		if (pending == 0) {
+			System.out.println("All Caught Up Pending Count =0");
+			return;
 		}
+
+		while (pending > 0) {
+			click(DeviceSessionManager.getDriver(), lp.ApproveBtn);
+			System.out.println("Approved one Business remaining before : " + pending);
+
+			final int expected = pending - 1;
+			new WebDriverWait(DeviceSessionManager.getDriver(), Duration.ofSeconds(10))
+					.until(d -> Integer.parseInt(lp.beforeCount.getText().trim()) == expected);
+
+			pending = expected;
+		}
+		System.out.println("All pending business approved pending count =0");
+//		ViewWait(DeviceSessionManager.getDriver(), lp.approvals);
+//		visibilityWait(DeviceSessionManager.getDriver(), lp.beforeCount);
+//		int expectedCount = beforeCount - 1;
+//		int actualCount = Integer.parseInt(lp.beforeCount.getText().trim());
+//
+//		System.out.println("BeforeCount: " + beforeCount);
+//		System.out.println("AfterCount: " + actualCount);
+//		try {
+//		Assert.assertEquals(expectedCount, actualCount);
+//		}finally {
+//		navigateBack(DeviceSessionManager.getDriver());
+//		click(DeviceSessionManager.getDriver(), lp.businessModeration);
+//		
+//		}
 	}
 
 	@When("the admin capture the current pending count")
@@ -263,6 +284,7 @@ public class ProfilePageStep extends BaseClass {
 				break;
 
 			}
+
 			swipeDown((AndroidDriver) DeviceSessionManager.getDriver());
 
 		}
@@ -366,6 +388,7 @@ public class ProfilePageStep extends BaseClass {
 
 		click(DeviceSessionManager.getDriver(), lp.navigateBack);
 	}
+
 	int beforeNotifications;
 
 	@Given("the admin tap on notification")

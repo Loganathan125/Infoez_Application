@@ -1,4 +1,4 @@
-@create
+@admin
 Feature: to verify the create account
 
   Background:

@@ -1,6 +1,6 @@
-
+@admin
 Feature: verify the home page fuctionality
-@home
+
   Scenario Outline: to verify the location search and nearby business functionality
     Given the user tap on location field
     When the user choosyour city popup should be displayed
@@ -17,12 +17,7 @@ Feature: verify the home page fuctionality
     And the admin tap turn on option
     Then the Nearby business should be displayed
 
-    #Examples:
-     # | City     | location |
-    #  | abc      | invalid1 |
-    #  | 23426242 | invalid2 |
-     # | Chennai  | valid    |
-     # | ch       | valid    |
+    
 
   Scenario: to verify the business actions like call,whatsapp,directions,enquiry ,share and favourite
     Given the admin click on search bar

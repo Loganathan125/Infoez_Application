@@ -1,4 +1,4 @@
-@profile
+@admin
 Feature: Profile Page Functionality
 
   Scenario: Admin sees control center on profile

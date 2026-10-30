@@ -1,3 +1,4 @@
+@admin
 Feature: to verify the logout functionality
 
   Scenario: to verify the logout functionality

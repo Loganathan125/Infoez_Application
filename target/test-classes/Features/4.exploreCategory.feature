@@ -1,3 +1,4 @@
+@admin
 Feature: Explore Category Validation
 
   Scenario: to verify the explore categories
@@ -29,7 +30,7 @@ Feature: Explore Category Validation
     And the Education explore busines Page should be displayed
     Then Education Place found countt should be validate
     
-    @explore
+     
     Scenario: to verify the featured in city
     Given  the users tap on location field
     When  the user tap on city

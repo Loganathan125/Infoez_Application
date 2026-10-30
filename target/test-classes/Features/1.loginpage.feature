@@ -1,4 +1,4 @@
-@login
+@admin
 Feature: Infoez Mobile Application login functionality
 
   Background:
@@ -13,17 +13,20 @@ Feature: Infoez Mobile Application login functionality
     Then the user redirected the home page "<HomePage>"
 
     Examples:
-      | username         | password  | HomePage  |
-    #  |                  |           | InValid1  |
-    #  | 1234567899       | 12345678  | InValid2  |
-    #  | admin@infoez.com | Admin     | InValid3  |
-     # | admin@infoez.com | admin@123 | InValid4  |
-     # | admin@infoez.com | ADMIN@123 | InValid5  |
-     # | admin@infoez.com | !@$%^&*@! | InValid6  |
-     # | admin&infoez.com | Admin@123 | InValid7  |
-     # | 123456789        | Admin@123 | Invalid8  |
-     # | admin@infoez.com | 123456789 | InValid9  |
-     # | admininfoez.com  | Admin@123 | InValid10 |
-     # |                  | Admin@123 | Invalid11 |
-     # | admin@infoez.com |           | Invalid12 |
-      | admin@infoez.com | Admin@123 | Valid     |
+      | username         | password  | HomePage |
+      # |                  |           | InValid1  |
+      # | 1234567899       | 12345678  | InValid2 |
+      # | admin@infoez.com | Admin     | InValid3  |
+      # | admin@infoez.com | admin@123 | InValid4  |
+      # | admin@infoez.com | ADMIN@123 | InValid5  |
+      # | admin@infoez.com | !@$%^&*@! | InValid6  |
+      # | 123456789        | Admin@123 | Invalid8  |
+      # | admin@infoez.com | 123456789 | InValid9  |
+      # | admininfoez.com  | Admin@123 | InValid10 |
+      # |                  | Admin@123 | Invalid11 |
+      # | admin@infoez.com |           | Invalid12 |
+      | admin@infoez.com | Admin@123 | Valid    |
+      
+# Scenario: password field has show/hide toggle
+# When the user enter the password "Admin@123"
+# Then the user should see show password icon
